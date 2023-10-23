@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.1/flatly/bootstrap.min.css" integrity="sha512-ldgaQUlXqDU+183CsQuhAZc2umDdtD2iteIzs35Tm0qmbZDq7Lz3gdW4cnYWXJZVO851UNIQQ0BtgwTYp/FcgQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.css" >
+    
+  </head>
+  <body>
+    
+    {% block content %}
+    {% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js"></script>  
+
+    <script>
+        $("#example").DataTable({
+            paging: true,
+            pageLenghth: 10,
+            lengthChange: true,
+            autoWidth: true,
+            searching: true,
+            bInfo: true,
+            bSort: true,
+            
+            dom: 'Blfrtip',
+            buttons:[
+              {
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i>',
+                className: 'btn btn-dark',
+                titleAttr: 'Excel',
+              },
+              {
+                extend: 'pdf',
+                orientation: 'landscape',
+                text: '<i class="fas fa-file-pdf"></i>',
+                className: 'btn btn-danger',
+                titleAttr: 'PDF',
+                pdfOrientation: "landscape",
+
+                tableHeader:{
+                  alignment: 'center'
+                },
+                customize: function(doc) {
+                    doc.styles.tableHeader.alignment = 'left';
+                    doc.styles.tableBodyOdd.alignment = 'left';
+                    doc.styles.tableBodyEven.alignment = 'left';
+
+                    doc.content[1].table.widths = Array(doc.content[1].table.body[1].length + 1).join('*').split('');
+                }
+              },
+
+              {
+                extend: 'print',
+                text: '<i class="fas fa-print"></i>',
+                className: 'btn btn-warning',
+                titleAttr: 'Print',
+              },
+            ]
+        });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Follow up sheet report{% endblock title %}
+
+{% block content %}
+{% include 'nav.html' %}
+<style>
+    .dataTables_length{
+        margin-top: 10px !important;
+        margin-bottom: -30px !important;
+    }
+</style>
+    <div class="container mt-4">
+        <form method="GET">
+            <div class="row justify-content-center mb-3">
+                <div class="col-2">
+                    {{ form.date|as_crispy_field }}
+                </div>
+                <div class="col-1">
+                    {{ form.department|as_crispy_field }}
+                </div>
+                <div class="col-3 mt-2">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        <table id="example" class="table table-bordered" style="width:100%">
+            <thead class="table-success">
+                <tr>
+                    <th>Date</th>
+                    <th>Room</th>
+                    <th>Request</th>
+                    <th>Department</th>
+                    <th>Time request</th>
+                    <th>Status</th>
+                    <th>Time done</th>
+                    <th>Taken by</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rq in reqsts %}
+                <tr>
+                    <td>{{rq.date_added|date}}</td>
+                    <td>{{rq.room}}</td>
+                    <td>{{rq.request}}</td>
+                    <td>{{rq.department}}</td>
+                    <td>{{rq.date_added|time}}</td>
+                    <td>{{rq.status}}</td>
+                    <td>{{rq.date_updated|time}}</td>
+                    <td>{{rq.created_by}}</td>
+                    <td>{{rq.diff|floatformat:2}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+{% endblock %}
