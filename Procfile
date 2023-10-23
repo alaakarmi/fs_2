@@ -1,1 +1,1 @@
-web: gunicorn src.wsgi
+web: gunicorn fs_2.wsgi
