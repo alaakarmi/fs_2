@@ -24,6 +24,7 @@ class Request(models.Model):
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    notes = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.room

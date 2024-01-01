@@ -21,4 +21,5 @@ class UpdateRequestForm(forms.ModelForm):
             "request",
             "department",
             "status",
+            "notes"
         ]
